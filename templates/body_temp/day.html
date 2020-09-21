@@ -1,0 +1,47 @@
+{% extends 'body_temp/base.html' %}
+
+{% block title%}{{ day|date:"Y年m月d日" }}検温結果一覧{% endblock title%}
+
+{% block content %}
+
+<h1>{{ day|date:"Y年m月d日" }}検温結果一覧</h1>
+
+<p><a href="{% url 'body_temp:new' %}">＋新規追加</a></p>
+{% if next_day %}
+  <p><a href="{% url 'body_temp:today' %}">＜本日の検温結果へ戻る＞</a></p>
+{% endif %}
+{% if previous_day %}
+  <a href="{% url 'body_temp:day' previous_day.year previous_day.month previous_day.day %}">
+    ＜前日
+  </a>
+{% endif %}
+{% if next_day %}
+  <a href="{% url 'body_temp:day' next_day.year next_day.month next_day.day %}">
+    翌日＞
+  </a>
+{% endif %}
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>所属部署</th>
+      <th>氏名</th>
+      <th>体温</th>
+      <th colspan="2">変更・削除</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for body_temp in body_temp_list %}
+    <tr>
+      <td>{{ body_temp.name.department }}</td>
+      <td>{{ body_temp.name }}</td>
+      <td>{{ body_temp.temp }}</td>
+      <td><a href="{% url 'body_temp:edit' body_temp.pk %}">変更</a></td>
+      <td><a href="{% url 'body_temp:delete' body_temp.pk %}">削除</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
+

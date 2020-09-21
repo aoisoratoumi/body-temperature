@@ -1,0 +1,15 @@
+{% extends 'body_temp/base.html' %}
+
+{% block title %}検温結果削除{% endblock title %}
+
+{% block content %}
+
+<h1>検温結果削除</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <p>{{ body_temp.created_at}} {{ body_temp.name }} 様の検温結果を削除します。</p>
+  <input type="submit" value="削除">
+</form>
+
+{% endblock content %}

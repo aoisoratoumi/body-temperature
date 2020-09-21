@@ -1,0 +1,16 @@
+<!-- templates/body_temp_new.html -->
+{% extends 'body_temp/base.html' %}
+
+{% block title %}検温結果入力{% endblock title %}
+
+{% block content %}
+
+<h1>検温結果入力</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="保存">
+</form>
+
+{% endblock content %}
